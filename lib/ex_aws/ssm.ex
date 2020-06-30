@@ -178,6 +178,28 @@ defmodule ExAws.SSM do
 
   @doc """
   Describes one or more of your instances.
+
+  Doc: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeInstanceInformation.html
+
+  ## Example:
+        iex> SSM.describe_instance_information(filters: [%{"Key": "InstanceIds", "Values": ["i-0EXAMPLE"]}], max_results: 10)
+        %ExAws.Operation.JSON{
+          before_request: nil,
+          data: %{
+            "Filters" => [%{Key: "InstanceIds", Values: ["i-0EXAMPLE"]}],
+            "MaxResults" => 10
+          },
+          headers: [
+            {"x-amz-target", "AmazonSSM.DescribeInstanceInformation"},
+            {"content-type", "application/x-amz-json-1.1"}
+          ],
+          http_method: :post,
+          params: %{},
+          parser: #Function<1.12038698/1 in ExAws.Operation.JSON.new/2>,
+          path: "/",
+          service: :ssm,
+          stream_builder: nil
+        }
   """
   @spec describe_instance_information(opts :: [describe_instance_information_opt]) ::
           ExAws.Operation.JSON.t()
@@ -189,7 +211,6 @@ defmodule ExAws.SSM do
       |> maybe_add_max_results(opts)
       |> maybe_add_next_token(opts)
 
-    IO.puts("Params:#{inspect(params)}")
     request(:describe_instance_information, params)
   end
 
