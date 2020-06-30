@@ -1,7 +1,7 @@
 defmodule ExAws.SSM do
   @moduledoc """
   Documentation for ExAws.SSM.
-  
+
   AWS API version 2014-11-06.
   """
   import ExAws.SSM.Utils
@@ -37,6 +37,15 @@ defmodule ExAws.SSM do
           {:name, binary}
           | pagination_opts
           | decryption_opt
+
+  @type filter :: [
+          key: binary,
+          values: list(binary)
+        ]
+
+  @type describe_instance_information_opt ::
+          {:filter, list(filter)}
+          | pagination_opts
 
   @doc """
   Get information about a parameter by using the parameter name.
@@ -165,6 +174,23 @@ defmodule ExAws.SSM do
       |> maybe_add_next_token(opts)
 
     request(:get_parameter_history, params)
+  end
+
+  @doc """
+  Describes one or more of your instances.
+  """
+  @spec describe_instance_information(opts :: [describe_instance_information_opt]) ::
+          ExAws.Operation.JSON.t()
+  def describe_instance_information(opts \\ []) do
+    params =
+      %{
+        "Filters" => opts[:filters] || []
+      }
+      |> maybe_add_max_results(opts)
+      |> maybe_add_next_token(opts)
+
+    IO.puts("Params:#{inspect(params)}")
+    request(:describe_instance_information, params)
   end
 
   defp request(action, params) do

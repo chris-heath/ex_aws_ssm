@@ -10,15 +10,16 @@ Documentation can be found at [https://hexdocs.pm/ex_aws_ssm](https://hexdocs.pm
 
 The following actions are currently supported.
 
-| action              |
-| ---------------------- |
-| delete_parameter       |
-| delete_parameters      |
-| get_parameter          |
-| get_parameters         |
-| get_parameters_by_path |
-| get_parameter_history  |
-| put_parameter          |
+| action                        |
+| ----------------------------- |
+| delete_parameter              |
+| delete_parameters             |
+| describe_instance_information |
+| get_parameter                 |
+| get_parameters                |
+| get_parameters_by_path        |
+| get_parameter_history         |
+| put_parameter                 |
 
 ## Installation
 
